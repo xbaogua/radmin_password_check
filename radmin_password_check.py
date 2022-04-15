@@ -69,13 +69,14 @@ def radmin_check(reg_value, user_password):
     gener_ver = generator_hash(username=username, modulus=modulus, g=g, salt=salt, password=user_password)
     #
     check_res = compare_ver(hashh, gener_ver)
-
+    #
+    user_name = username.replace(b"\x00", b"").decode("utf-8")
     if check_res:
-        print(f"password is {user_password} !!!")
+        print(f"username is {user_name} , password is {user_password} !!!")
     else:
         print(f"{user_password} is not password")
     #
-    return check_res, user_password
+    return check_res, user_name, user_password
 
 
 if __name__ == "__main__":
